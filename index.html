@@ -4,60 +4,42 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>🔥 Rizz System — Version 1 (Phase A)</title>
-
-  <!-- Styles (cache-buster version param) -->
-  <link rel="stylesheet" href="styles.css?v=3.1.0">
+  <link rel="stylesheet" href="styles.css?v=3.2.0">
 </head>
 <body>
-  <main class="wrap" role="main">
-    <header class="header">
-      <h1>🔥 Rizz System — Version 1 <span class="muted">(Phase A)</span></h1>
-      <p class="sub">Focus limit = <strong>2</strong> · Auto-focus ≥90% · Decay −10 every 2 days</p>
-    </header>
+<main class="wrap">
+  <h1>🔥 Rizz System — Version 1 <span class="muted">(Phase A)</span></h1>
+  <p class="sub">Focus limit = 2 · Auto-focus ≥90% · Decay −10 every 2 days</p>
 
-    <!-- input + main actions -->
-    <section class="controls-row">
-      <input id="nameInput" class="input" placeholder="Add name (e.g. Charity)" aria-label="Add name">
-      <div class="btn-group">
-        <button id="addBtn" class="btn primary">Add / Update</button>
-        <button id="decayBtn" class="btn">Run Decay</button>
-      </div>
-    </section>
+  <div class="controls-row">
+    <input id="nameInput" placeholder="Add name (e.g. Charity)">
+    <button id="addBtn" class="primary">Add / Update</button>
+    <button id="decayBtn">Run Decay</button>
+  </div>
 
-    <!-- pause/resume -->
-    <section class="controls-row">
-      <div class="btn-group">
-        <button id="pauseAll" class="btn">Pause All</button>
-        <button id="resumeAll" class="btn ghost">Resume All</button>
-      </div>
-    </section>
+  <div class="controls-row">
+    <button id="pauseAll">Pause All</button>
+    <button id="resumeAll">Resume All</button>
+  </div>
 
-    <!-- phase card -->
-    <section class="card" aria-live="polite">
-      <div class="card-top">
-        <div class="phase-title">Phase — <span id="phase">0%</span></div>
-        <div class="bar-wrap" aria-hidden>
-          <div id="phaseBar" class="bar-inner" style="width:0%"></div>
-        </div>
-      </div>
+  <div class="card">
+    <strong>Phase — <span id="phase">0%</span></strong>
+    <div class="bar">
+      <div id="phaseBar"></div>
+    </div>
 
-      <div class="card-actions">
-        <button id="decMinus10" class="pill">−10</button>
-        <button id="incPlus10" class="pill">+10</button>
-        <button id="focusBtn" class="pill">Focus / Unfocus</button>
-        <button id="deleteBtn" class="pill danger">Delete Focused</button>
-      </div>
-    </section>
+    <div class="actions">
+      <button id="minus">−10</button>
+      <button id="plus">+10</button>
+      <button id="focusToggle">Focus / Unfocus</button>
+      <button id="deleteFocused" class="danger">Delete Focused</button>
+    </div>
+  </div>
 
-    <!-- list -->
-    <section id="list" class="list" aria-live="polite"></section>
+  <div id="list" class="list"></div>
+  <div id="status" class="muted">Ready</div>
+</main>
 
-    <footer class="status">
-      <div id="statusText" class="muted">Ready</div>
-    </footer>
-  </main>
-
-  <!-- Logic (cache-buster param; bump when updating app.js) -->
-  <script src="app.js?v=3.1.0"></script>
+<script src="app.js?v=3.2.0"></script>
 </body>
 </html>
