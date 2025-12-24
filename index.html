@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rizz System — Version 1</title>
 
 <style>
@@ -15,38 +15,16 @@
   --border:#e5e7eb;
 }
 
-*{
-  box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
+*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 
-body{
-  margin:0;
-  background:var(--bg);
-  color:#111827;
-}
+body{margin:0;background:var(--bg);color:#111827}
 
-.container{
-  max-width:720px;
-  margin:auto;
-  padding:16px;
-}
+.container{max-width:760px;margin:auto;padding:16px}
 
-h1{
-  font-size:22px;
-  margin-bottom:4px;
-}
+h1{font-size:22px;margin-bottom:4px}
+small{color:var(--muted)}
 
-small{
-  color:var(--muted);
-}
-
-.card{
-  background:var(--card);
-  border-radius:14px;
-  padding:14px;
-  margin-top:14px;
-}
+.card{background:var(--card);border-radius:14px;padding:14px;margin-top:14px}
 
 input{
   width:100%;
@@ -54,52 +32,39 @@ input{
   border-radius:10px;
   border:1px solid var(--border);
   margin-bottom:10px;
-  font-size:15px;
 }
 
 button{
-  padding:10px 14px;
+  padding:8px 12px;
   border-radius:999px;
   border:1px solid var(--border);
   background:#fff;
-  font-size:14px;
+  font-size:13px;
 }
 
-.primary{
-  background:var(--accent);
-  color:#fff;
-  border:none;
-}
+.primary{background:var(--accent);color:#fff;border:none}
+.danger{background:var(--danger);color:#fff;border:none}
 
-.danger{
-  background:var(--danger);
-  color:#fff;
-  border:none;
-}
-
-.row{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
+.row{display:flex;gap:8px;flex-wrap:wrap}
 
 .progress{
-  height:10px;
+  height:8px;
   background:#e5e7eb;
   border-radius:999px;
   overflow:hidden;
-  margin-top:6px;
 }
 
 .progress span{
-  height:100%;
   display:block;
+  height:100%;
   background:var(--accent);
 }
 
 .item{
-  padding:12px 0;
-  border-bottom:1px solid var(--border);
+  background:#fff;
+  border-radius:12px;
+  padding:12px;
+  margin-top:10px;
 }
 
 .tag{
@@ -109,21 +74,10 @@ button{
   margin-left:6px;
 }
 
-.focus{
-  background:#d1fae5;
-  color:#065f46;
-}
+.focus{background:#d1fae5;color:#065f46}
+.pause{background:#fef3c7;color:#92400e}
 
-.pause{
-  background:#fef3c7;
-  color:#92400e;
-}
-
-.footer{
-  margin-top:18px;
-  color:var(--muted);
-  font-size:13px;
-}
+.footer{margin-top:16px;color:var(--muted);font-size:13px}
 </style>
 </head>
 
@@ -134,9 +88,9 @@ button{
 <small>Focus limit = 2 · Auto-focus ≥90%</small>
 
 <div class="card">
-  <input id="nameInput" placeholder="Add name (e.g. Charity)" />
+  <input id="nameInput" placeholder="Add name (e.g. Charity)">
   <div class="row">
-    <button class="primary" onclick="addOrUpdate()">Add / Update</button>
+    <button class="primary" onclick="addPerson()">Add / Update</button>
     <button onclick="runDecay()">Run Decay</button>
     <button onclick="pauseAll()">Pause All</button>
     <button onclick="resumeAll()">Resume All</button>
@@ -144,119 +98,98 @@ button{
 </div>
 
 <div class="card">
-  <strong>Overall Progress — <span id="avgValue">0%</span></strong>
-  <div class="progress"><span id="avgBar" style="width:0%"></span></div>
-
-  <div class="row" style="margin-top:10px">
-    <button onclick="adjustFocused(-10)">−10</button>
-    <button onclick="adjustFocused(10)">+10</button>
-    <button onclick="toggleFocus()">Focus / Unfocus</button>
-    <button class="danger" onclick="deleteFocused()">Delete Focused</button>
-  </div>
-
+  <strong>Overall Progress — <span id="avg">0%</span></strong>
+  <div class="progress"><span id="avgBar"></span></div>
   <div id="list"></div>
 </div>
 
-<div class="footer" id="status">Ready</div>
+<div class="footer" id="status">Rendered 0 entries</div>
 
 </div>
 
 <script>
 let people = JSON.parse(localStorage.getItem("rizz_v1")) || [];
 
-function save(){
-  localStorage.setItem("rizz_v1", JSON.stringify(people));
-}
+function save(){localStorage.setItem("rizz_v1",JSON.stringify(people))}
 
-function addOrUpdate(){
-  const name = nameInput.value.trim();
-  if(!name) return;
-
-  let p = people.find(x => x.name === name);
+function addPerson(){
+  const name=nameInput.value.trim();
+  if(!name)return;
+  let p=people.find(x=>x.name===name);
   if(!p){
-    p = { name, progress:0, focus:false, pause:false };
+    p={name,progress:0,focus:false,pause:false};
     people.push(p);
   }
-
   autoFocus(p);
   nameInput.value="";
-  save();
-  render();
+  save();render();
 }
 
 function autoFocus(p){
-  if(p.progress >= 90){
-    const focused = people.filter(x => x.focus).length;
-    if(focused < 2) p.focus = true;
+  if(p.progress>=90){
+    if(people.filter(x=>x.focus).length<2)p.focus=true;
   }
 }
 
 function runDecay(){
-  people.forEach(p=>{
-    if(!p.pause) p.progress = Math.max(0, p.progress - 10);
-  });
-  save();
-  render();
+  people.forEach(p=>{if(!p.pause)p.progress=Math.max(0,p.progress-10)});
+  save();render();
 }
 
-function pauseAll(){
-  people.forEach(p=>p.pause=true);
-  save(); render();
+function pauseAll(){people.forEach(p=>p.pause=true);save();render()}
+function resumeAll(){people.forEach(p=>p.pause=false);save();render()}
+
+function adjust(p,val){
+  if(p.pause)return;
+  p.progress=Math.min(100,Math.max(0,p.progress+val));
+  autoFocus(p);
+  save();render();
 }
 
-function resumeAll(){
-  people.forEach(p=>p.pause=false);
-  save(); render();
+function toggleFocus(p){
+  if(p.focus)p.focus=false;
+  else if(people.filter(x=>x.focus).length<2)p.focus=true;
+  save();render();
 }
 
-function adjustFocused(val){
-  people.forEach(p=>{
-    if(p.focus && !p.pause){
-      p.progress = Math.min(100, Math.max(0, p.progress + val));
-      autoFocus(p);
-    }
-  });
-  save();
-  render();
-}
-
-function toggleFocus(){
-  const focused = people.filter(p=>p.focus);
-  if(focused.length){
-    focused.forEach(p=>p.focus=false);
-  }
-}
-
-function deleteFocused(){
-  people = people.filter(p=>!p.focus);
-  save();
-  render();
+function del(p){
+  people=people.filter(x=>x!==p);
+  save();render();
 }
 
 function render(){
   list.innerHTML="";
-  let total = 0;
+  let total=0;
 
   people.forEach(p=>{
-    total += p.progress;
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = `
+    total+=p.progress;
+    const d=document.createElement("div");
+    d.className="item";
+    d.innerHTML=`
       <strong>${p.name}</strong>
-      ${p.focus ? '<span class="tag focus">FOCUS</span>' : ''}
-      ${p.pause ? '<span class="tag pause">PAUSED</span>' : ''}
-      <div class="progress">
+      ${p.focus?'<span class="tag focus">FOCUS</span>':''}
+      ${p.pause?'<span class="tag pause">PAUSED</span>':''}
+
+      <div class="progress" style="margin:6px 0">
         <span style="width:${p.progress}%"></span>
       </div>
+
+      <div class="row">
+        <button onclick='adjust(${JSON.stringify(p)},10)'>+10</button>
+        <button onclick='adjust(${JSON.stringify(p)},-10)'>-10</button>
+        <button onclick='toggleFocus(${JSON.stringify(p)})'>${p.focus?'Unfocus':'Focus'}</button>
+        <button onclick='p.pause=!p.pause;save();render()'>${p.pause?'Resume':'Pause'}</button>
+        <button class="danger" onclick='del(${JSON.stringify(p)})'>Delete</button>
+      </div>
     `;
-    list.appendChild(div);
+    list.appendChild(d);
   });
 
-  const avg = people.length ? Math.round(total / people.length) : 0;
-  avgValue.textContent = avg + "%";
-  avgBar.style.width = avg + "%";
+  const avg=people.length?Math.round(total/people.length):0;
+  avg.textContent=avg+"%";
+  avgBar.style.width=avg+"%";
+  status.textContent=`Rendered ${people.length} entries`;
 }
-
 render();
 </script>
 </body>
