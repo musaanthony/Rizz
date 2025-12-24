@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rizz System — Version 1</title>
+
+<style>
+:root{
+  --bg:#ffffff;
+  --card:#f6f8f9;
+  --accent:#10b981;
+  --muted:#6b7280;
+  --danger:#ef4444;
+  --border:#e5e7eb;
+}
+
+*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:#111827;
+}
+
+.container{
+  max-width:720px;
+  margin:auto;
+  padding:16px;
+}
+
+h1{
+  font-size:22px;
+  margin-bottom:4px;
+}
+
+small{color:var(--muted)}
+
+.card{
+  background:var(--card);
+  border-radius:14px;
+  padding:14px;
+  margin-top:14px;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+button{
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:#fff;
+  font-size:14px;
+}
+
+.primary{background:var(--accent);color:#fff;border:none}
+.danger{background:var(--danger);color:#fff;border:none}
+
+.row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.progress{
+  height:10px;
+  background:#e5e7eb;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+.progress span{
+  height:100%;
+  display:block;
+  background:var(--accent);
+  width:0%;
+}
+
+.item{
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.tag{
+  font-size:11px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#e5e7eb;
+  margin-left:6px;
+}
+.focus{background:#d1fae5;color:#065f46}
+.pause{background:#fef3c7;color:#92400e}
+
+.footer{
+  margin-top:20px;
+  color:var(--muted);
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>🔥 Rizz System — Version 1 <small>(Phase A)</small></h1>
+<small>Focus limit = 2 · Auto-focus ≥90% · Decay −10 every 2 days</small>
+
+<div class="card">
+  <input id="nameInput" placeholder="Add name (e.g. Charity)">
+  <div class="row">
+    <button class="primary" onclick="addOrUpdate()">Add / Update</button>
+    <button onclick="runDecay()">Run Decay</button>
+    <button onclick="pauseAll()">Pause All</button>
+    <button onclick="resumeAll()">Resume All</button>
+  </div>
+</div>
+
+<div class="card">
+  <strong>Phase — <span id="phaseValue">0%</span></strong>
+  <div class="progress"><span id="phaseBar"></span></div>
+
+  <div class="row" style="margin-top:10px">
+    <button onclick="adjust(-10)">−10</button>
+    <button onclick="adjust(10)">+10</button>
+    <button onclick="toggleFocus()">Focus / Unfocus</button>
+    <button class="danger" onclick="deleteFocused()">Delete Focused</button>
+  </div>
+
+  <div id="list"></div>
+</div>
+
+<div class="footer" id="status">Ready</div>
+
+</div>
+
+<script>
+let data = JSON.parse(localStorage.getItem("rizz_v1")) || [];
+
+function save(){localStorage.setItem("rizz_v1",JSON.stringify(data))}
+
+function addOrUpdate(){
+  const name=nameInput.value.trim();
+  if(!name) return;
+  let p=data.find(x=>x.name===name);
+  if(!p){
+    p={name,phase:0,focus:false,pause:false};
+    data.push(p);
+  }
+  autoFocus(p);
+  nameInput.value="";
+  save();render();
+}
+
+function autoFocus(p){
+  if(p.phase>=90){
+    const f=data.filter(x=>x.focus).length;
+    if(f<2) p.focus=true;
+  }
+}
+
+function runDecay(){
+  data.forEach(p=>{if(!p.pause)p.phase=Math.max(0,p.phase-10)});
+  save();render();
+}
+
+function pauseAll(){data.forEach(p=>p.pause=true);save();render()}
+function resumeAll(){data.forEach(p=>p.pause=false);save();render()}
+
+function adjust(val){
+  data.forEach(p=>{
+    if(p.focus && !p.pause){
+      p.phase=Math.min(100,Math.max(0,p.phase+val));
+      autoFocus(p);
+    }
+  });
+  save();render();
+}
+
+function toggleFocus(){
+  const f=data.filter(p=>p.focus);
+  if(f.length && f.length<=2){f.forEach(p=>p.focus=false)}
+}
+
+function deleteFocused(){
+  data=data.filter(p=>!p.focus);
+  save();render();
+}
+
+function render(){
+  list.innerHTML="";
+  let avg=0;
+  data.forEach(p=>{
+    avg+=p.phase;
+    const d=document.createElement("div");
+    d.className="item";
+    d.innerHTML=`<strong>${p.name}</strong>
+      ${p.focus?'<span class="tag focus">FOCUS</span>':''}
+      ${p.pause?'<span class="tag pause">PAUSED</span>':''}
+      <div class="progress"><span style="width:${p.phase}%"></span></div>`;
+    list.appendChild(d);
+  });
+  avg=data.length?Math.round(avg/data.length):0;
+  phaseValue.textContent=avg+"%";
+  phaseBar.style.width=avg+"%";
+}
+
+render();
+</script>
+</body>
+</html>
