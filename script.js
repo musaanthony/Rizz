@@ -51,7 +51,9 @@ form.addEventListener("submit", e => {
 
   if (!name) return;
 
-  people.push({ name, status, notes });
+  const focus = Math.max(0, Math.min(100, Number(form.focus.value) || 0));
+
+people.push({ name, status, notes, focus });
   save();
   render();
 
