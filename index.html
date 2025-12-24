@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rizz System — Version 1</title>
+
+<style>
+:root{
+  --bg:#000;
+  --card:#0f1112;
+  --muted:#9aa3ad;
+  --accent:#00d08a;
+  --pause:#ffb020;
+  --focus:#00d08a;
+  --danger:#ff6b6b;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:#fff;
+  font-family:system-ui, -apple-system, BlinkMacSystemFont;
+}
+
+.wrap{
+  max-width:760px;
+  margin:auto;
+  padding:20px;
+}
+
+h1{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+small{color:var(--muted)}
+
+.card{
+  background:var(--card);
+  border-radius:12px;
+  padding:14px;
+  margin-bottom:12px;
+}
+
+input,button{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  font-size:15px;
+}
+
+input{
+  background:#111;
+  color:#fff;
+  margin-bottom:8px;
+}
+
+button{
+  background:var(--accent);
+  color:#000;
+  font-weight:600;
+}
+
+.row{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+}
+
+.row button{
+  flex:1;
+  font-size:13px;
+}
+
+.progress{
+  height:8px;
+  background:#222;
+  border-radius:8px;
+  overflow:hidden;
+  margin-top:6px;
+}
+
+.progress span{
+  display:block;
+  height:100%;
+  background:var(--accent);
+  width:0%;
+}
+
+.tag{
+  display:inline-block;
+  font-size:11px;
+  padding:4px 8px;
+  border-radius:999px;
+  margin-right:6px;
+}
+
+.focus{background:rgba(0,208,138,.15); color:var(--focus)}
+.pause{background:rgba(255,176,32,.15); color:var(--pause)}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<h1>Rizz System <small>Version 1</small></h1>
+
+<div class="card">
+  <input id="nameInput" placeholder="Add name (e.g. Sharifah)" />
+  <button onclick="addPerson()">Add to Rizz System</button>
+</div>
+
+<div id="list"></div>
+
+</div>
+
+<script>
+let people = JSON.parse(localStorage.getItem("rizz_v1")) || [];
+
+function save(){
+  localStorage.setItem("rizz_v1", JSON.stringify(people));
+}
+
+function addPerson(){
+  const name = nameInput.value.trim();
+  if(!name) return;
+
+  people.push({
+    id: Date.now(),
+    name,
+    progress: 10,
+    focus:false,
+    pause:false
+  });
+
+  nameInput.value="";
+  save();
+  render();
+}
+
+function toggleFocus(id){
+  const focused = people.filter(p=>p.focus).length;
+  const p = people.find(x=>x.id===id);
+
+  if(!p.focus && focused>=2){
+    alert("Focus limit reached (2)");
+    return;
+  }
+  p.focus = !p.focus;
+  save();
+  render();
+}
+
+function togglePause(id){
+  const p = people.find(x=>x.id===id);
+  p.pause = !p.pause;
+  save();
+  render();
+}
+
+function incProgress(id){
+  const p = people.find(x=>x.id===id);
+  p.progress = Math.min(100, p.progress+10);
+  save();
+  render();
+}
+
+function render(){
+  list.innerHTML="";
+  people.forEach(p=>{
+    const div=document.createElement("div");
+    div.className="card";
+
+    div.innerHTML=`
+      <strong>${p.name}</strong><br/>
+      ${p.focus?'<span class="tag focus">FOCUS</span>':''}
+      ${p.pause?'<span class="tag pause">PAUSE</span>':''}
+
+      <div class="progress">
+        <span style="width:${p.progress}%"></span>
+      </div>
+
+      <div class="row">
+        <button onclick="incProgress(${p.id})">+ Progress</button>
+        <button onclick="toggleFocus(${p.id})">Focus</button>
+        <button onclick="togglePause(${p.id})">Pause</button>
+      </div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+render();
+</script>
+</body>
+</html>
