@@ -38,3 +38,34 @@ h1 {
   font-size: 13px;
   color: #00d08a;
 }
+input, textarea, button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+}
+
+button {
+  background: #00d08a;
+  color: #000;
+  font-weight: 600;
+}
+
+.focus-wrap {
+  margin-top: 10px;
+}
+
+.focus-bar {
+  height: 8px;
+  background: #1c1f22;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.focus-fill {
+  height: 100%;
+  background: #00d08a;
+  width: 0%;
+}
