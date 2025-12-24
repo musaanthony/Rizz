@@ -24,11 +24,19 @@ function render() {
     card.className = "card";
 
     card.innerHTML = `
-      <strong>${p.name}</strong><br>
-      <span class="sub">${p.status}</span>
-      <p>${p.notes}</p>
-      <button onclick="removePerson(${i})">Remove</button>
-    `;
+  <strong>${p.name}</strong><br>
+  <span class="sub">${p.status}</span>
+
+  <div class="focus-wrap">
+    <div class="focus-bar">
+      <div class="focus-fill" style="width:${p.focus}%"></div>
+    </div>
+    <div class="sub">${p.focus}% focus</div>
+  </div>
+
+  <p>${p.notes}</p>
+  <button onclick="removePerson(${i})">Remove</button>
+`;
 
     list.appendChild(card);
   });
