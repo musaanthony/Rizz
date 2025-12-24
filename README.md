@@ -1,2 +1,2 @@
-# Rizz
-System
+# Rizz web
+
