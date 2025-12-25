@@ -34,6 +34,35 @@ function getAdvice(p) {
 
   return "Keep it steady. No pressure.";
 }
+function updateDashboard() {
+  if (people.length === 0) {
+    document.getElementById("dashFocus").textContent = "—";
+    document.getElementById("dashPause").textContent = "—";
+    document.getElementById("dashAction").textContent = "Add someone to begin.";
+    return;
+  }
+
+  const sorted = [...people].sort((a, b) => b.focus - a.focus);
+
+  const focusPerson = sorted.find(p => p.focus >= 70);
+  const pausePerson = sorted.find(p => p.focus < 40);
+
+  document.getElementById("dashFocus").textContent =
+    focusPerson ? focusPerson.name : "No high focus";
+
+  document.getElementById("dashPause").textContent =
+    pausePerson ? pausePerson.name : "No one to pause";
+
+  if (focusPerson) {
+    document.getElementById("dashAction").textContent =
+      focusPerson.reminder
+        ? "Handle the reminder first."
+        : "Reach out or plan a meet.";
+  } else {
+    document.getElementById("dashAction").textContent =
+      "Maintain balance. Don’t force anything.";
+  }
+}
 function render() {
   list.innerHTML = "";
 
