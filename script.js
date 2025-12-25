@@ -196,6 +196,23 @@ form.addEventListener("submit", e => {
   people.push({ name, status, notes, focus, reminder });
   save();
   render();
+  people.push({ name, status, notes, focus, reminder });
+save();
+render();
+
+// 🔁 RESET FORM + FOCUS BUTTON STATE
+form.reset();
+
+// reset hidden focus value (important)
+const hidden = form.querySelector('[name="focus"]');
+if (hidden) hidden.value = "0";
+
+// clear selected state from focus buttons
+const focusBtns = document.querySelectorAll(".focus-btn");
+focusBtns.forEach(b => b.classList.remove("selected"));
+
+// reset internal focus memory
+currentFocus = 0;
 
   // reset the form and focus buttons
   form.reset();
