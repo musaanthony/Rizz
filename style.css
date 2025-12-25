@@ -87,3 +87,9 @@ button {
 .has-reminder {
   box-shadow: 0 0 0 1px rgba(255,176,32,0.4);
 }
+.advice {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #9aa3ad;
+  font-style: italic;
+}
