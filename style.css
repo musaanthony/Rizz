@@ -140,3 +140,52 @@ button[type="submit"] {
   transform: scale(1.08);
   opacity: 0.9;
 }
+/* ===============================
+   Romantic Dashboard Upgrade 💘
+   =============================== */
+
+#dashboard {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 105, 180, 0.12),
+    rgba(0, 208, 138, 0.05)
+  );
+  border: 1px solid rgba(255, 105, 180, 0.25);
+  box-shadow:
+    0 0 25px rgba(255, 105, 180, 0.25),
+    inset 0 0 30px rgba(255, 255, 255, 0.03);
+}
+
+#dashboard h3 {
+  color: #ff8fc7;
+  letter-spacing: 0.5px;
+}
+
+/* Focus person highlight */
+#dashFocus {
+  color: #ff6fae;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 111, 174, 0.6);
+}
+
+/* Pause stays calm */
+#dashPause {
+  color: #9aa3ad;
+}
+
+/* Action feels intimate */
+#dashAction {
+  color: #ffd1e8;
+  font-style: italic;
+}
+
+/* Soft heartbeat animation */
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+#dashboard {
+  animation: heartbeat 6s ease-in-out infinite;
+}
