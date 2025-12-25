@@ -21,7 +21,15 @@ function render() {
 
   people.forEach((p, i) => {
     const card = document.createElement("div");
-    card.className = "card";
+card.className = "card";
+
+if (p.focus < 40) {
+  card.classList.add("low-focus");
+}
+
+if (p.focus >= 70) {
+  card.classList.add("high-focus");
+}
 
     card.innerHTML = `
   <strong>${p.name}</strong><br>
