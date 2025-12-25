@@ -127,3 +127,16 @@ button[type="submit"] {
 
 /* small helpers */
 .sub { margin-bottom: 6px; color: #9aa3ad; }
+/* Smooth focus animation */
+.focus-fill {
+  transition: width 0.35s ease;
+}
+
+.focus-value {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.focus-bump {
+  transform: scale(1.08);
+  opacity: 0.9;
+}
