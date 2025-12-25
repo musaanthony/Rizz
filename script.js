@@ -70,7 +70,7 @@ form.addEventListener("submit", e => {
 
   const focus = Math.max(0, Math.min(100, Number(form.focus.value) || 0));
 
-people.push({ name, status, notes, focus });
+people.push({ name, status, notes, focus, reminder });
   save();
   render();
 
