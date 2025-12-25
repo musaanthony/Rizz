@@ -69,3 +69,10 @@ button {
   background: #00d08a;
   width: 0%;
 }
+.card.low-focus {
+  opacity: 0.4;
+}
+
+.card.high-focus {
+  border: 1px solid #00d08a;
+}
