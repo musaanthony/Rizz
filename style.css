@@ -76,3 +76,14 @@ button {
 .card.high-focus {
   border: 1px solid #00d08a;
 }
+.reminder {
+  margin-top: 8px;
+  padding: 8px;
+  border-left: 3px solid #ffb020;
+  background: rgba(255, 176, 32, 0.08);
+  font-size: 13px;
+}
+
+.has-reminder {
+  box-shadow: 0 0 0 1px rgba(255,176,32,0.4);
+}
