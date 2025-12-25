@@ -183,3 +183,33 @@ button {
   color: #ffb020;
   font-weight: 600;
 }
+.focus-control {
+  margin-top: 10px;
+}
+
+.focus-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#focusValue {
+  flex: 1;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffd6e0;
+}
+
+#focusPlus,
+#focusMinus {
+  width: 56px;
+  height: 44px;
+  border-radius: 12px;
+  font-size: 22px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ff80a0, #ff4d8a);
+  color: #fff;
+  border: none;
+}
