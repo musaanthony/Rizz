@@ -119,3 +119,12 @@ button {
   color: #9aa3ad;
   margin-right: 6px;
 }
+.urgent {
+  border: 1px solid #ffb020;
+  box-shadow: 0 0 0 1px rgba(255,176,32,0.3);
+}
+
+.urgent .reminder {
+  color: #ffb020;
+  font-weight: 600;
+}
