@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rizz Web — Version 1</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,40 +11,60 @@
   <div class="app">
     <h1>Rizz Web</h1>
     <div class="sub">Version 1 — Visual Base</div>
+
+    <!-- Dashboard -->
     <div id="dashboard" class="card">
-  <strong>Today’s Dashboard</strong>
+      <strong>💘 Today’s Dashboard</strong>
 
-  <div class="dash-item">
-    <span class="dash-label">🎯 Focus:</span>
-    <span id="dashFocus">—</span>
-  </div>
+      <div class="dash-item">
+        <span class="dash-label">🎯 Focus:</span>
+        <span id="dashFocus">—</span>
+      </div>
 
-  <div class="dash-item">
-    <span class="dash-label">⏸ Pause:</span>
-    <span id="dashPause">—</span>
-  </div>
+      <div class="dash-item">
+        <span class="dash-label">⏸ Pause:</span>
+        <span id="dashPause">—</span>
+      </div>
 
-  <div class="dash-item">
-    <span class="dash-label">🧠 Action:</span>
-    <span id="dashAction">—</span>
-  </div>
-</div>
+      <div class="dash-item">
+        <span class="dash-label">🧠 Action:</span>
+        <span id="dashAction">—</span>
+      </div>
+    </div>
 
     <div class="card">
       <div class="status">✅ Style loaded successfully</div>
     </div>
-  </div>
-  <form id="addForm" class="card">
-  <input name="name" placeholder="Name" required>
-  <input name="status" placeholder="Status (crush, dating, pause)">
-  <input name="focus" type="number" min="0" max="100" placeholder="Focus % (0–100)">
-  <textarea name="notes" placeholder="Notes"></textarea>
-  <input name="reminder" placeholder="Reminder (e.g. Call tonight)">
-  <button type="submit">Add</button>
-</form>
 
-<div id="peopleList"></div>
-<script src="script.js"></script>
+    <!-- Add form -->
+    <form id="addForm" class="card">
+      <input name="name" placeholder="Name" required>
+      <input name="status" placeholder="Status (crush, dating, pause)">
+
+      <!-- Hidden focus value (set by buttons) -->
+      <input type="hidden" name="focus" value="0">
+
+      <!-- Focus buttons (tap to set) -->
+      <div class="focus-buttons">
+        <div class="sub">Set Focus (tap a button)</div>
+        <div class="buttons">
+          <button type="button" class="focus-button" data-focus="0">0</button>
+          <button type="button" class="focus-button" data-focus="20">20</button>
+          <button type="button" class="focus-button" data-focus="40">40</button>
+          <button type="button" class="focus-button" data-focus="60">60</button>
+          <button type="button" class="focus-button" data-focus="80">80</button>
+          <button type="button" class="focus-button" data-focus="100">100</button>
+        </div>
+      </div>
+
+      <textarea name="notes" placeholder="Notes"></textarea>
+      <input name="reminder" placeholder="Reminder (e.g. Call tonight)">
+      <button type="submit">Add</button>
+    </form>
+
+    <div id="peopleList"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
-</div>
 </html>
