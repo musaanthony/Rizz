@@ -47,15 +47,18 @@
       <!-- Focus buttons (tap to set) -->
       <div class="focus-buttons">
         <div class="sub">Set Focus (tap a button)</div>
-        <div class="buttons">
-          <button type="button" class="focus-button" data-focus="0">0</button>
-          <button type="button" class="focus-button" data-focus="20">20</button>
-          <button type="button" class="focus-button" data-focus="40">40</button>
-          <button type="button" class="focus-button" data-focus="60">60</button>
-          <button type="button" class="focus-button" data-focus="80">80</button>
-          <button type="button" class="focus-button" data-focus="100">100</button>
-        </div>
-      </div>
+       <!-- Focus controller -->
+<input type="hidden" name="focus" value="0">
+
+<div class="focus-control">
+  <div class="sub">Set Focus</div>
+
+  <div class="focus-row">
+    <button type="button" id="focusMinus">−</button>
+    <div id="focusValue">0%</div>
+    <button type="button" id="focusPlus">+</button>
+  </div>
+</div>
 
       <textarea name="notes" placeholder="Notes"></textarea>
       <input name="reminder" placeholder="Reminder (e.g. Call tonight)">
