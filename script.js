@@ -1,5 +1,5 @@
 // Rizz Web — Version 1 Core Engine
-
+localStorage.removeItem("rizz_people");
 const form = document.getElementById("addForm");
 const list = document.getElementById("peopleList");
 
