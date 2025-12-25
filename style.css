@@ -106,3 +106,16 @@ button {
   color: #9aa3ad;
   margin-right: 6px;
 }
+#dashboard {
+  margin-bottom: 20px;
+}
+
+.dash-item {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.dash-label {
+  color: #9aa3ad;
+  margin-right: 6px;
+}
