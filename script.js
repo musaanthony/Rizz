@@ -208,5 +208,26 @@ form.addEventListener("submit", e => {
 });
 
 // ===== START =====
-wireFocusButtons();
+// ===== PLUS / MINUS FOCUS CONTROL =====
+const focusInput = form.querySelector('[name="focus"]');
+const focusValueEl = document.getElementById("focusValue");
+const plusBtn = document.getElementById("focusPlus");
+const minusBtn = document.getElementById("focusMinus");
+
+let currentFocus = 0;
+
+function updateFocusUI() {
+  focusInput.value = currentFocus;
+  focusValueEl.textContent = currentFocus + "%";
+}
+
+plusBtn.addEventListener("click", () => {
+  currentFocus = Math.min(100, currentFocus + 10);
+  updateFocusUI();
+});
+
+minusBtn.addEventListener("click", () => {
+  currentFocus = Math.max(0, currentFocus - 10);
+  updateFocusUI();
+});
 render();
