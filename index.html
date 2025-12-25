@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Rizz Web — Version 1</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <div class="app">
     <h1>Rizz Web</h1>
     <div class="sub">Version 1 — Visual Base</div>
@@ -38,30 +37,24 @@
 
     <!-- Add form -->
     <form id="addForm" class="card">
-      <input name="name" placeholder="Name" required>
-      <input name="status" placeholder="Status (crush, dating, pause)">
+      <input name="name" placeholder="Name" required />
+      <input name="status" placeholder="Status (crush, dating, pause)" />
 
-      <!-- Hidden focus value (set by buttons) -->
-      <input type="hidden" name="focus" value="0">
+      <!-- Hidden focus input (the value that will be submitted) -->
+      <input type="hidden" name="focus" value="0" />
 
-      <!-- Focus buttons (tap to set) -->
-      <div class="focus-buttons">
-        <div class="sub">Set Focus (tap a button)</div>
-       <!-- Focus controller -->
-<input type="hidden" name="focus" value="0">
-
-<div class="focus-control">
-  <div class="sub">Set Focus</div>
-
-  <div class="focus-row">
-    <button type="button" id="focusMinus">−</button>
-    <div id="focusValue">0%</div>
-    <button type="button" id="focusPlus">+</button>
-  </div>
-</div>
+      <!-- Focus control: plus / minus -->
+      <div class="focus-control">
+        <div class="sub">Set Focus</div>
+        <div class="focus-row">
+          <button type="button" id="focusMinus" class="focus-btn">−</button>
+          <div id="focusValue">0%</div>
+          <button type="button" id="focusPlus" class="focus-btn">+</button>
+        </div>
+      </div>
 
       <textarea name="notes" placeholder="Notes"></textarea>
-      <input name="reminder" placeholder="Reminder (e.g. Call tonight)">
+      <input name="reminder" placeholder="Reminder (e.g. Call tonight)" />
       <button type="submit">Add</button>
     </form>
 
