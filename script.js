@@ -64,6 +64,7 @@ form.addEventListener("submit", e => {
   const name = form.name.value.trim();
   const status = form.status.value;
   const notes = form.notes.value.trim();
+  const reminder = form.reminder.value.trim();
 
   if (!name) return;
 
