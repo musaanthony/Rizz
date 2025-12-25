@@ -38,6 +38,7 @@ h1 {
   font-size: 13px;
   color: #00d08a;
 }
+
 input, textarea, button {
   width: 100%;
   margin-top: 10px;
@@ -53,6 +54,7 @@ button {
   font-weight: 600;
 }
 
+/* Focus visuals (progress bar) */
 .focus-wrap {
   margin-top: 10px;
 }
@@ -69,6 +71,8 @@ button {
   background: #00d08a;
   width: 0%;
 }
+
+/* Priority classes */
 .card.low-focus {
   opacity: 0.4;
 }
@@ -76,6 +80,8 @@ button {
 .card.high-focus {
   border: 1px solid #00d08a;
 }
+
+/* Reminder styles */
 .reminder {
   margin-top: 8px;
   padding: 8px;
@@ -87,38 +93,87 @@ button {
 .has-reminder {
   box-shadow: 0 0 0 1px rgba(255,176,32,0.4);
 }
+
+/* Advice */
 .advice {
   margin-top: 8px;
   font-size: 13px;
   color: #9aa3ad;
   font-style: italic;
 }
+
+/* Dashboard base */
 #dashboard {
   margin-bottom: 20px;
+  /* romantic card look */
+  background: linear-gradient(135deg, rgba(255,80,130,0.08), rgba(255,150,190,0.04));
+  border: 1px solid rgba(255,80,130,0.12);
+  box-shadow: 0 6px 18px rgba(255,80,130,0.03);
 }
 
+/* Dashboard items */
 .dash-item {
   margin-top: 8px;
   font-size: 14px;
 }
 
 .dash-label {
-  color: #9aa3ad;
+  color: #ffd6e0;
   margin-right: 6px;
 }
+
+/* romantic accent for values */
+#dashFocus, #dashPause, #dashAction {
+  color: #ffd6e0;
+  font-weight: 700;
+}
+
+/* decorative heart (small) */
+#dashboard strong::before {
+  content: "💘 ";
+}
+
+/* Focus buttons styling */
+.focus-buttons .buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.focus-button {
+  min-width: 46px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.03);
+  font-weight: 700;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.focus-button.selected {
+  background: linear-gradient(90deg, #ff80a0, #ff4d8a);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 6px 16px rgba(255,80,130,0.12);
+}
+
+/* keep existing dashboard styles repeated safely */
 #dashboard {
   margin-bottom: 20px;
 }
-
 .dash-item {
   margin-top: 8px;
   font-size: 14px;
 }
-
 .dash-label {
   color: #9aa3ad;
   margin-right: 6px;
 }
+
+/* Urgency styling */
 .urgent {
   border: 1px solid #ffb020;
   box-shadow: 0 0 0 1px rgba(255,176,32,0.3);
