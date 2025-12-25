@@ -57,13 +57,15 @@ function updateDashboard() {
 
   document.getElementById("dashPause").textContent =
     pausePerson ? pausePerson.name : "No one to pause";
-
-  if (focusPerson) {
-    document.getElementById("dashAction").textContent =
-      focusPerson.reminder
+if (focusPerson) {
+  document.getElementById("dashAction").textContent =
+    isUrgent(focusPerson.reminder)
+      ? "Urgent today. Do this now."
+      : focusPerson.reminder
         ? "Handle the reminder first."
         : "Reach out or plan a meet.";
-  } else {
+}
+   else {
     document.getElementById("dashAction").textContent =
       "Maintain balance. Don’t force anything.";
   }
