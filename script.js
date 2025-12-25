@@ -30,6 +30,9 @@ if (p.focus < 40) {
 if (p.focus >= 70) {
   card.classList.add("high-focus");
 }
+if (p.reminder) {
+  card.classList.add("has-reminder");
+}
 
     card.innerHTML = `
   <strong>${p.name}</strong><br>
