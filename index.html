@@ -1,60 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Rizz Web — Version 1</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="app">
     <h1>Rizz Web</h1>
     <div class="sub">Version 1 — Visual Base</div>
 
-    <!-- Dashboard -->
     <div id="dashboard" class="card">
-      <strong>💘 Today’s Dashboard</strong>
+      <h3>Today's Dashboard</h3>
 
       <div class="dash-item">
-        <span class="dash-label">🎯 Focus:</span>
+        <span class="emoji">💘</span>
+        <span class="dash-label">Focus:</span>
         <span id="dashFocus">—</span>
       </div>
 
       <div class="dash-item">
-        <span class="dash-label">⏸ Pause:</span>
+        <span class="emoji">⏸</span>
+        <span class="dash-label">Pause:</span>
         <span id="dashPause">—</span>
       </div>
 
       <div class="dash-item">
-        <span class="dash-label">🧠 Action:</span>
+        <span class="emoji">🧠</span>
+        <span class="dash-label">Action:</span>
         <span id="dashAction">—</span>
       </div>
     </div>
 
-    <div class="card">
-      <div class="status">✅ Style loaded successfully</div>
+    <div class="card status-note">
+      <div class="status-ok">✅ Style loaded successfully</div>
     </div>
 
-    <!-- Add form -->
     <form id="addForm" class="card">
       <input name="name" placeholder="Name" required />
-      <input name="status" placeholder="Status (crush, dating, pause)" />
 
-      <!-- Hidden focus input (the value that will be submitted) -->
-      <input type="hidden" name="focus" value="0" />
-
-      <!-- Focus control: plus / minus -->
-      <div class="focus-control">
-        <div class="sub">Set Focus</div>
-        <div class="focus-row">
-          <button type="button" id="focusMinus" class="focus-btn">−</button>
-         <div id="focusValue" class="focus-value">0%</div>
-          <button type="button" id="focusPlus" class="focus-btn">+</button>
+      <!-- ===== STATUS BUTTONS (replaces text input) ===== -->
+      <div class="status-group">
+        <div class="status-label">Status</div>
+        <div class="status-buttons" role="radiogroup" aria-label="Status">
+          <button type="button" class="status-btn" data-status="crush" aria-pressed="false">💘 Crush</button>
+          <button type="button" class="status-btn" data-status="dating" aria-pressed="false">💞 Dating</button>
+          <button type="button" class="status-btn" data-status="pause" aria-pressed="false">⏸ Pause</button>
         </div>
+        <!-- hidden field kept for backward compatibility with existing JS -->
+        <input type="hidden" name="status" id="statusHidden" value="">
+      </div>
+
+      <!-- ===== FOCUS (plus/minus) ===== -->
+      <div class="focus-row">
+        <div class="focus-label">Set Focus</div>
+        <div class="focus-controls">
+          <button type="button" class="focus-btn minus" id="minusBtn">−</button>
+          <div class="focus-display" id="focusDisplay">0%</div>
+          <button type="button" class="focus-btn plus" id="plusBtn">+</button>
+        </div>
+        <!-- hidden focus input so existing code (form.focus.value) works -->
+        <input type="hidden" name="focus" id="focusHidden" value="0">
       </div>
 
       <textarea name="notes" placeholder="Notes"></textarea>
-      <input name="reminder" placeholder="Reminder (e.g. Call tonight)" />
+      <input name="reminder" placeholder="Reminder (e.g. Call tonight)">
+
       <button type="submit">Add</button>
     </form>
 
