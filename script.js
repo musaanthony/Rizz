@@ -1,4 +1,4 @@
-// Rizz Web — Version 1 Core Engine (STABLE)
+// Rizz Web — Version 1 Core Engine (STABLE + focus-buttons)
 
 // ===== DOM =====
 const form = document.getElementById("addForm");
@@ -154,6 +154,26 @@ function removePerson(index) {
   render();
 }
 
+// ===== FOCUS BUTTONS WIRING =====
+// This will attach listeners to the focus buttons and set the hidden input value.
+function wireFocusButtons() {
+  const focusBtns = document.querySelectorAll(".focus-button");
+  if (!focusBtns || focusBtns.length === 0) return;
+
+  focusBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const v = btn.getAttribute("data-focus") || "0";
+      // set hidden input
+      const hidden = form.querySelector('[name="focus"]');
+      if (hidden) hidden.value = v;
+
+      // toggle selected class
+      focusBtns.forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+    });
+  });
+}
+
 // ===== ADD =====
 form.addEventListener("submit", e => {
   e.preventDefault();
@@ -176,8 +196,17 @@ form.addEventListener("submit", e => {
   people.push({ name, status, notes, focus, reminder });
   save();
   render();
+
+  // reset the form and focus buttons
   form.reset();
+  const hidden = form.querySelector('[name="focus"]');
+  if (hidden) hidden.value = "0";
+
+  // clear selected state from focus buttons
+  const focusBtns = document.querySelectorAll(".focus-button");
+  focusBtns.forEach(b => b.classList.remove("selected"));
 });
 
 // ===== START =====
+wireFocusButtons();
 render();
