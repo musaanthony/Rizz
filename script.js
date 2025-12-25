@@ -41,11 +41,7 @@ function updateDashboard() {
     document.getElementById("dashAction").textContent = "Add someone to begin.";
     return;
   }
-  function isUrgent(reminder) {
-  if (!reminder) return false;
-  const text = reminder.toLowerCase();
-  return text.includes("today") || text.includes("tonight") || text.includes("now");
-}
+  
 
   const sorted = [...people].sort((a, b) => b.focus - a.focus);
 
@@ -69,6 +65,11 @@ if (focusPerson) {
     document.getElementById("dashAction").textContent =
       "Maintain balance. Don’t force anything.";
   }
+}
+function isUrgent(reminder) {
+  if (!reminder) return false;
+  const text = reminder.toLowerCase();
+  return text.includes("today") || text.includes("tonight") || text.includes("now");
 }
 function render() {
   list.innerHTML = "";
