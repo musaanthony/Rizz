@@ -106,6 +106,7 @@ if (p.reminder) {
 
     list.appendChild(card);
   });
+  updateDashboard();
 }
 
 // Remove person
