@@ -11,6 +11,29 @@ function save() {
 }
 
 // Render people list
+function getAdvice(p) {
+  if (p.reminder) {
+    return "You have something scheduled — handle this first.";
+  }
+
+  if (p.focus >= 70 && p.status === "dating") {
+    return "High priority. Call or see them soon.";
+  }
+
+  if (p.focus >= 70 && p.status === "crush") {
+    return "Build momentum. Light flirting or check-in works.";
+  }
+
+  if (p.focus < 40) {
+    return "Low priority. Do not over-invest.";
+  }
+
+  if (p.status === "pause") {
+    return "Give space. Let them come to you.";
+  }
+
+  return "Keep it steady. No pressure.";
+}
 function render() {
   list.innerHTML = "";
 
