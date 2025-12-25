@@ -1,3 +1,7 @@
+/* ============================
+   Rizz Web — style.css (v1.1)
+   ============================ */
+
 * { box-sizing: border-box; }
 
 body {
@@ -13,9 +17,16 @@ body {
   padding: 20px;
 }
 
-h1 { font-size: 28px; margin-bottom: 6px; }
+h1 {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
 
-.sub { color: #9aa3ad; font-size: 14px; margin-bottom: 20px; }
+.sub {
+  color: #9aa3ad;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
 
 .card {
   background: #0f1112;
@@ -24,10 +35,57 @@ h1 { font-size: 28px; margin-bottom: 6px; }
   margin-bottom: 14px;
 }
 
-/* status */
-.status { font-size: 13px; color: #00d08a; }
+.status-ok {
+  font-size: 14px;
+  color: #00d08a;
+}
 
-/* form fields */
+/* ======================
+   Dashboard — Romantic
+   ====================== */
+#dashboard {
+  background: linear-gradient(180deg, rgba(255,105,180,0.08), rgba(0,0,0,0.06));
+  border: 1px solid rgba(255,105,180,0.16);
+  box-shadow: 0 0 25px rgba(255,105,180,0.06), inset 0 0 20px rgba(255,255,255,0.02);
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+#dashboard h3 {
+  margin: 0 0 8px;
+  color: #ffd1e8;
+}
+
+.dash-item {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.dash-label {
+  color: #9aa3ad;
+  margin-right: 6px;
+}
+
+#dashFocus {
+  color: #ff6fae;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(255,111,174,0.5);
+}
+
+#dashPause { color: #9aa3ad; }
+#dashAction { color: #ffd1e8; font-style: italic; }
+
+/* heartbeat animation */
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+#dashboard { animation: heartbeat 6s ease-in-out infinite; }
+
+/* ======================
+   Form fields & buttons
+   ====================== */
 input, textarea, button {
   width: 100%;
   margin-top: 10px;
@@ -35,6 +93,8 @@ input, textarea, button {
   border-radius: 8px;
   border: none;
   font-size: 14px;
+  background: #fff;
+  color: #000;
 }
 
 textarea { min-height: 80px; resize: vertical; }
@@ -43,149 +103,107 @@ button[type="submit"] {
   background: #00d08a;
   color: #000;
   font-weight: 600;
+  padding: 14px;
+  border-radius: 10px;
 }
 
-/* focus visuals (progress bar) */
+/* focus bar (cards) */
 .focus-wrap { margin-top: 10px; }
-
 .focus-bar {
   height: 8px;
   background: #1c1f22;
   border-radius: 6px;
   overflow: hidden;
 }
+.focus-fill {
+  height: 100%;
+  background: #00d08a;
+  width: 0%;
+}
 
-.focus-fill { height: 100%; background: #00d08a; width: 0%; }
-
-/* priority classes */
+/* low/high focus visuals for cards */
 .card.low-focus { opacity: 0.4; }
 .card.high-focus { border: 1px solid #00d08a; }
 
-/* reminder */
-.reminder {
-  margin-top: 8px;
-  padding: 8px;
-  border-left: 3px solid #ffb020;
-  background: rgba(255, 176, 32, 0.08);
-  font-size: 13px;
-}
-
+/* reminder styles */
+.reminder { margin-top: 8px; padding: 8px; border-left: 3px solid #ffb020; background: rgba(255,176,32,0.08); font-size: 13px; }
 .has-reminder { box-shadow: 0 0 0 1px rgba(255,176,32,0.4); }
-
-/* advice */
 .advice { margin-top: 8px; font-size: 13px; color: #9aa3ad; font-style: italic; }
 
-/* Dashboard romantic look */
-#dashboard {
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, rgba(255,80,130,0.08), rgba(255,150,190,0.04));
-  border: 1px solid rgba(255,80,130,0.12);
-  box-shadow: 0 6px 18px rgba(255,80,130,0.03);
-  border-radius: 12px;
-  padding: 14px;
-}
-
-.dash-item { margin-top: 8px; font-size: 14px; }
-.dash-label { color: #ffd6e0; margin-right: 6px; }
-#dashFocus, #dashPause, #dashAction { color: #ffd6e0; font-weight: 700; }
-
-/* Focus control (plus/minus) */
-.focus-control { margin-top: 10px; }
-.focus-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-#focusValue {
-  flex: 1;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 700;
-  color: #ffd6e0;
-}
-.focus-btn {
-  width: 56px;
-  height: 44px;
-  border-radius: 12px;
-  font-size: 22px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ff80a0, #ff4d8a);
-  color: #fff;
-  border: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
 /* urgent */
-.urgent {
-  border: 1px solid #ffb020;
-  box-shadow: 0 0 0 1px rgba(255,176,32,0.3);
-}
+.urgent { border: 1px solid #ffb020; box-shadow: 0 0 0 1px rgba(255,176,32,0.3); }
 .urgent .reminder { color: #ffb020; font-weight: 600; }
 
-/* small helpers */
-.sub { margin-bottom: 6px; color: #9aa3ad; }
-/* Smooth focus animation */
-.focus-fill {
-  transition: width 0.35s ease;
-}
+/* ======================
+   Status buttons styles
+   ====================== */
+.status-group { margin-top: 8px; margin-bottom: 12px; }
+.status-label { color: #9aa3ad; font-size: 14px; margin-bottom: 8px; }
+.status-buttons { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
 
-.focus-value {
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-
-.focus-bump {
-  transform: scale(1.08);
-  opacity: 0.9;
-}
-/* ===============================
-   Romantic Dashboard Upgrade 💘
-   =============================== */
-
-#dashboard {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 105, 180, 0.12),
-    rgba(0, 208, 138, 0.05)
-  );
-  border: 1px solid rgba(255, 105, 180, 0.25);
-  box-shadow:
-    0 0 25px rgba(255, 105, 180, 0.25),
-    inset 0 0 30px rgba(255, 255, 255, 0.03);
-}
-
-#dashboard h3 {
-  color: #ff8fc7;
-  letter-spacing: 0.5px;
-}
-
-/* Focus person highlight */
-#dashFocus {
-  color: #ff6fae;
+.status-btn {
+  flex: 1;
+  padding: 12px 10px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(180deg, #1b1f21 0%, #141616 100%);
+  color: #e6e6e6;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(255, 111, 174, 0.6);
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.35);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.status-btn:active { transform: translateY(1px) scale(.998); }
+.status-btn:hover { transform: translateY(-1px); }
+
+.status-btn.selected {
+  background: linear-gradient(180deg, #ff6fae 0%, #ff5a9d 100%);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(255,111,174,0.16), inset 0 -2px 0 rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+.status-btn[data-status="pause"].selected {
+  background: linear-gradient(180deg, #bfc7d0 0%, #98a3ad 100%);
+  color: #0f1112;
 }
 
-/* Pause stays calm */
-#dashPause {
-  color: #9aa3ad;
+/* ======================
+   Focus plus/minus controls
+   ====================== */
+.focus-row { margin-top: 12px; }
+.focus-label { color: #9aa3ad; margin-bottom: 8px; font-size: 14px; }
+.focus-controls { display:flex; gap:12px; align-items:center; justify-content:space-between; }
+
+.focus-btn {
+  width:72px;
+  height:56px;
+  border-radius:12px;
+  border:none;
+  font-size:28px;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  background: linear-gradient(180deg,#ff7fae,#ff5a9d);
+  color:#fff;
+  box-shadow:0 6px 18px rgba(255,111,174,0.14);
+}
+.focus-btn.minus { background: linear-gradient(180deg,#ff7fae,#ff5a9d); }
+.focus-btn.plus { background: linear-gradient(180deg,#ff7fae,#ff5a9d); }
+
+.focus-display {
+  flex:1;
+  text-align:center;
+  color:#ffd1e8;
+  font-weight:700;
+  font-size:18px;
 }
 
-/* Action feels intimate */
-#dashAction {
-  color: #ffd1e8;
-  font-style: italic;
-}
-
-/* Soft heartbeat animation */
-@keyframes heartbeat {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.04); }
-  100% { transform: scale(1); }
-}
-
-#dashboard {
-  animation: heartbeat 6s ease-in-out infinite;
+/* small screen tweak */
+@media (max-width:420px){
+  .status-buttons { gap:8px; }
+  .focus-controls { gap:8px; }
+  .focus-btn { width:60px; height:52px; font-size:24px; }
 }
