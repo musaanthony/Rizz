@@ -90,6 +90,9 @@ if (p.focus >= 70) {
 if (p.reminder) {
   card.classList.add("has-reminder");
 }
+if (isUrgent(p.reminder)) {
+  card.classList.add("urgent");
+}
 
     card.innerHTML = `
   <strong>${p.name}</strong><br>
