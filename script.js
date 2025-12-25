@@ -41,6 +41,8 @@ if (p.focus >= 70) {
     </div>
     <div class="sub">${p.focus}% focus</div>
   </div>
+  ${p.reminder ? `<div class="reminder">⏰ ${p.reminder}</div>` : ""}
+  
 
   <p>${p.notes}</p>
   <button onclick="removePerson(${i})">Remove</button>
