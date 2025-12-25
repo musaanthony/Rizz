@@ -68,6 +68,7 @@ if (p.reminder) {
     <div class="sub">${p.focus}% focus</div>
   </div>
   ${p.reminder ? `<div class="reminder">⏰ ${p.reminder}</div>` : ""}
+  <div class="advice">${getAdvice(p)}</div>
   
 
   <p>${p.notes}</p>
