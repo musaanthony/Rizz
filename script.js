@@ -75,9 +75,10 @@ function render() {
   list.innerHTML = "";
 
   if (people.length === 0) {
-    list.innerHTML = `<div class="card sub">No entries yet</div>`;
-    return;
-  }
+  list.innerHTML = `<div class="card sub">No entries yet</div>`;
+  updateDashboard(); // 👈 ADD THIS
+  return;
+}
 
   people.forEach((p, i) => {
     const card = document.createElement("div");
